@@ -1,0 +1,43 @@
+[workspace]
+members = ["crates/*"]
+resolver = "2"
+
+
+[workspace.dependencies]
+dotenvy = { version = "0.15" }
+warp = "0.3"
+tokio = { version = "1", features = ["full"] }
+
+# serialize and deserialize
+serde = { version = "1.0.217" }
+serde_json = { version = "1.0.138" }
+
+# tracing and logging
+tracing = "0.1.41"
+tracing-subscriber = { version = "0.3.19", features = ["env-filter"] }
+
+# time
+chrono = { version = "0.4.39" }
+
+# database
+sea-orm = { version = "1.1.4", features = [
+    "sqlx-postgres",
+    "runtime-tokio-native-tls",
+    "macros",
+    "with-chrono",
+    "sea-orm-internal",
+    "with-json",
+    "debug-print",
+] }
+
+# http server
+axum = { version = "0.8.1", features = ["macros"] }
+axum-macros = { version = "0.5.0" }
+axum-extra = { version = "0.10.0", features = ["typed-header"] }
+tower-http = { version = "0.6.2", features = ["cors"] }
+axum-derive-error = { version = "0.1.0" }
+
+
+# error handling
+thiserror = { version = "2.0.11" }
+
