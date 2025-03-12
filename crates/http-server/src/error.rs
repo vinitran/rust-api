@@ -1,5 +1,6 @@
 use std::borrow::Cow;
 use axum_derive_error::ErrorResponse;
+use axum::http::StatusCode;
 
 
 #[allow(dead_code)]
@@ -13,6 +14,13 @@ pub enum ServerError {
 
     #[error(transparent)]
     Database(#[from] database::sea_orm::error::DbErr),
+
+    #[error("{0:#?}")]
+    Custom(Cow<'static, str>),
+
+    #[error("{0:#?}")]
+    #[status(StatusCode::UNAUTHORIZED)]
+    Unauthorized(Cow<'static, str>),
 
     #[error(transparent)]
     SerdeJson(#[from] serde_json::Error),
